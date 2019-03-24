@@ -26,8 +26,7 @@ function check_for_no_pending_changes() {
     --password "${OPSMAN_PASSWORD}" \
     curl -path /api/v0/staged/pending_changes | jq '[ .product_changes[] | select(.action != "unchanged") ] | length')
   if [[ $pending_changes_count -ne 0 ]]; then
-    echo "Detected $pending_changes_count pending changes. Aborting."
-    exit 1
+    echo "Detected $pending_changes_count pending changes. Ignoring."
   fi
 }
 
